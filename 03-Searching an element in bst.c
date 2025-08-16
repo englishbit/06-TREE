@@ -59,7 +59,7 @@ int main(){
     insert(root,9);
     insert(root,4);
 
-    //logic for searching a value in bst
+    //logic for output
     int num;
     scanf("%d",&num);
     if(search(root,num)==1){
@@ -72,4 +72,5 @@ int main(){
 
     
     return 0;
+
 }
