@@ -88,6 +88,7 @@ int main(){
     int value;
     scanf("%d",&value);
 
+    //logic for output
     if(search(root,value)!=NULL){
         printf("The key is found\n");
     }else{
@@ -97,4 +98,5 @@ int main(){
 
     
     return 0;
+
 }
