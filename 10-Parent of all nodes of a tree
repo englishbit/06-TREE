@@ -1,0 +1,46 @@
+#include<iostream>
+using namespace std;
+
+#define MAX 1000
+int tree[MAX][MAX]={0};
+int vis[MAX];
+int parent[MAX];
+
+void dfs(int node,int num_node,int p){
+    vis[node]=1;
+    parent[node]=p;
+    
+    for(int i=0;i<num_node;i++){
+        if(tree[node][i]==1 && !vis[i]){
+            dfs(i,num_node,node);
+        }
+    }
+
+
+}
+int main(){
+    int node,edge,x,y;
+    cin>>node>>edge;
+
+    for(int i=0;i<edge;i++){
+        cin>>x>>y;
+        tree[x][y]=1;
+        tree[y][x]=1;
+    }
+
+    for(int i=0;i<node;i++){
+        parent[i]=-1;
+        vis[i]=0;
+    }
+
+
+    int root=0;
+    dfs(root,node,-1);
+
+    for(int i=0;i<node;i++){
+        cout<<i<<">---->"<<parent[i]<<endl;
+    }
+
+    return 0;
+
+}

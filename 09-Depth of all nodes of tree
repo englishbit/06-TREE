@@ -1,0 +1,55 @@
+#include<iostream>
+#include<queue>
+using namespace std;
+#define MAX 1000
+int tree[MAX][MAX]={0};
+int vis[MAX];
+int deep[MAX];
+queue<int>q;
+
+void bfs(int node,int total_node,int depth){
+
+    
+    vis[node]=1;
+    deep[node]=depth;
+    q.push(node);
+
+    while(!q.empty()){
+        int x=q.front();
+        q.pop();
+
+        for(int i=0;i<total_node;i++){
+            if(tree[x][i]==1 && !vis[i]){
+    
+                vis[i]=1;
+                deep[i]=deep[x]+1;
+                q.push(i);
+            }
+        }
+
+    }
+}
+
+int main(){
+    int node,edge,x,y;
+    cin>>node>>edge;
+    for(int i=0;i<edge;i++){
+        cin>>x>>y;
+        tree[x][y]=1;
+        tree[y][x]=1;
+    }
+
+    for(int i=0;i<node;i++){
+        deep[i]=-1;
+        vis[i]=0;
+    }
+
+    int root=0;
+    bfs(root,node,0);
+
+    for(int i=0;i<node;i++){
+        cout<<i<<">----->"<<deep[i]<<endl;
+    }
+
+    return 0;
+}
