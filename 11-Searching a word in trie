@@ -1,0 +1,62 @@
+#include<iostream>
+#include<cstdlib>
+#include<string>
+#define MAX 26
+
+struct node{
+    node* array[MAX];
+    bool flag;
+};
+
+node* create(){
+    node* newnode=new node;
+    for(int i=0;i<MAX;i++){
+        newnode->array[i]=nullptr;
+    }
+    newnode->flag=0;
+
+    return newnode;
+}
+
+void insert(node* root,const char *word){
+    node* current=root;
+    for(int i=0;word[i]!='\0';i++){
+        int index=word[i]-'a';
+        if(current->array[index]==nullptr){
+            current->array[index]=create();
+        }
+        current=current->array[index];
+    }
+    current->flag=1;
+}
+
+bool search(node* root,const char *word){
+    node* current=root;
+    for(int i=0;word[i]!='\0';i++){
+        int index=word[i]-'a';
+        if(current->array[index]==nullptr){
+            return 0;
+        }
+        current=current->array[index];
+    }
+
+    return current->flag;
+}
+
+int main(){
+    node* root=create();
+    int n;
+    string s,s2;
+    cin>>n;
+    for(int i=0;i<n;i++){
+        cin>>s;
+        insert(root,s.c_str());
+    }
+    
+    cin>>s2;
+    if(search(root,s2)==1)cout<<"yes";
+    else cout<<"no";
+
+    return 0;
+    
+}
